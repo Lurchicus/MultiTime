@@ -1,0 +1,84 @@
+[
+  // "id":        Used to search for a time zone
+  // "name":      A description for a time zone
+  // "offset":    UTC offset for a 'standard' time zone
+  // "offsetdst": UTC offset for a 'daylight savings' time zone
+  // "cname":     a unique, no spaces name for controls in a UI
+  {
+    "id": "UTC",
+    "name": "UTC",
+    "offset": "0",
+    "offsetdst": "0",
+    "cname": "UTC"
+  },
+  {
+    "id": "NFL",
+    "name": "Newfoundland",
+    "offset": "-3.5",
+    "offsetdst": "-2.5",
+    "cname": "Newfound"
+  },
+  {
+    "id": "PRS",
+    "name": "Puerto Rico",
+    "offset": "-4",
+    "offsetdst": "-4",
+    "cname": "PuertoRico"
+  },
+  {
+    "id": "EST",
+    "name": "Eastern",
+    "offset": "-5",
+    "offsetdst": "-4",
+    "cname": "Eastern"
+  },
+  {
+    "id": "CST",
+    "name": "Central",
+    "offset": "-6",
+    "offsetdst": "-5",
+    "cname": "Central"
+  },
+  {
+    "id": "MST",
+    "name": "Mountain",
+    "offset": "-7",
+    "offsetdst": "-6",
+    "cname": "Mountain"
+  },
+  {
+    "id": "MTA",
+    "name": "Mountain Az",
+    "offset": "-7",
+    "offsetdst": "-7",
+    "cname": "MountainAz"
+  },
+  {
+    "id": "PST",
+    "name": "Pacific",
+    "offset": "-8",
+    "offsetdst": "-7",
+    "cname": "Pacific"
+  },
+  {
+    "id": "AST",
+    "name": "Alaska",
+    "offset": "-9",
+    "offsetdst": "-8",
+    "cname": "Alaska"
+  },
+  {
+    "id": "HST",
+    "name": "Hawaii",
+    "offset": "-10",
+    "offsetdst": "-10",
+    "cname": "Hawaii"
+  },
+  {
+    "id": "IST",
+    "name": "Chennai",
+    "offset": "5.5",
+    "offsetdst": "5.5",
+    "cname": "Chennai"
+  }
+]

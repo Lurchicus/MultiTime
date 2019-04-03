@@ -1,0 +1,90 @@
+[
+  // "Id":      used to search (and keep order)
+  // "Name":    A name for the current color
+  // "Alpha":   Alpha channel value
+  // "Red":     Red channel value
+  // "Green":   Green channel value
+  // "Blue":    Blue channel value
+  // "ARGB":    ARGB setting (supplied by caller based on settings above)
+  {
+    "Id": "0",
+    "Name": "White",
+    "Alpha": "255",
+    "Red": "255",
+    "Green": "255",
+    "Blue": "255",
+    "ARGB": ""
+  },
+  {
+    "Id": "1",
+    "Name": "LightGrey",
+    "Alpha": "255",
+    "Red": "200",
+    "Green": "200",
+    "Blue": "200",
+    "ARGB": ""
+  },
+  {
+    "Id": "2",
+    "Name": "PaleRed",
+    "Alpha": "255",
+    "Red": "255",
+    "Green": "192",
+    "Blue": "192",
+    "ARGB": ""
+  },
+  {
+    "Id": "3",
+    "Name": "PaleOrange",
+    "Alpha": "255",
+    "Red": "255",
+    "Green": "224",
+    "Blue": "192",
+    "ARGB": ""
+  },
+  {
+    "Id": "4",
+    "Name": "PaleYellow",
+    "Alpha": "255",
+    "Red": "255",
+    "Green": "255",
+    "Blue": "192",
+    "ARGB": ""
+  },
+  {
+    "Id": "5",
+    "Name": "PaleGreen",
+    "Alpha": "255",
+    "Red": "192",
+    "Green": "255",
+    "Blue": "192",
+    "ARGB": ""
+  },
+  {
+    "Id": "6",
+    "Name": "PaleBlue",
+    "Alpha": "255",
+    "Red": "192",
+    "Green": "255",
+    "Blue": "255",
+    "ARGB": ""
+  },
+  {
+    "Id": "7",
+    "Name": "PaleViolet",
+    "Alpha": "255",
+    "Red": "192",
+    "Green": "192",
+    "Blue": "255",
+    "ARGB": ""
+  },
+  {
+    "Id": "8",
+    "Name": "PaleFuchia",
+    "Alpha": "255",
+    "Red": "255",
+    "Green": "192",
+    "Blue": "255",
+    "ARGB": ""
+  }
+]
