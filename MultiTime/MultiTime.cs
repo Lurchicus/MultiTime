@@ -40,6 +40,10 @@ namespace MultiTime
     /// 12/15/2018 Dan Rhea - Moved the color definitions into the json file
     ///                       MultiColor.json that is loaded into the list
     ///                       ColorMap via the RGB class
+    /// 04/03/2019 Dan Rhea - Pushed to GitHub
+    ///                     - Noticed the DST/ST logic may be reversed ><. So
+    ///                       it wasn't reversed, I did add a DT/DST for each
+    ///                       clock anyway.
     /// 
     /// ToDo:
     /// 
@@ -58,7 +62,7 @@ namespace MultiTime
         public List<TextBox> Txt = new List<TextBox>();     // List of clock row text boxes
         public List<Label> LabOffset = new List<Label>();   // List of clock row UTC offset labels
         public List<RGB> ColorMap = new List<RGB>();        // List of colors for text box background
-        
+
         const int MarginT = 5;          // Top margin for a TextBox
         const int MarginL = 9;          // Top margin for a Label
         const int LabLeft = 19;         // Clock label size and position
@@ -94,12 +98,12 @@ namespace MultiTime
             DateTime NowIs = DateTime.UtcNow;
             if (NowIs.IsDaylightSavingTime())
             {
-                labMsg.Text = "Daylight savings time";
+                labMsg.Text = "Daylight time (DST)";
                 IsDST = true;
             }
             else
             {
-                labMsg.Text = "Standard time";
+                labMsg.Text = "Standard time (ST)";
                 IsDST = false;
             }
 
@@ -133,7 +137,7 @@ namespace MultiTime
                 ColorMap = JsonConvert.DeserializeObject<List<RGB>>(json);
             }
             // Set aRGB
-            for (int Shade = 0; Shade<ColorMap.Count; Shade++)
+            for (int Shade = 0; Shade < ColorMap.Count; Shade++)
             {
                 ColorMap[Shade].aRGB = Color.FromArgb(
                     ColorMap[Shade].Alpha,
@@ -152,7 +156,7 @@ namespace MultiTime
             int Cl = 0;
             int BTop = 0;
 
-            for (int Row=0; Row<zones.Count; Row++)
+            for (int Row = 0; Row < zones.Count; Row++)
             {
                 // Set up the clock label 
                 string LabName = "Lab" + zones[Row].cname;
@@ -316,7 +320,8 @@ namespace MultiTime
                 var LabOffset = Controls.Find("labOffset" + zones[Clock].cname, true);
 
                 // If we have a control, update them
-                if (LabName.Length > 0) {
+                if (LabName.Length > 0)
+                {
                     // Update the clock name (only need to do once)
                     if (!ClockSet)
                     {
@@ -327,7 +332,8 @@ namespace MultiTime
                         NowIs.AddHours(Offset).ToLongTimeString() + " - " +
                         NowIs.AddHours(Offset).Hour.ToString() + ":" +
                         NowIs.AddHours(Offset).Minute.ToString("D2") + ":" +
-                        NowIs.AddHours(Offset).Second.ToString("D2");
+                        NowIs.AddHours(Offset).Second.ToString("D2") + " " +
+                        (NowIs.IsDaylightSavingTime() ? "DST" : "DT");
                     // Update the UTC offset (only need to do once)
                     if (!ClockSet)
                     {
