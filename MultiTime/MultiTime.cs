@@ -44,6 +44,13 @@ namespace MultiTime
     ///                     - Noticed the DST/ST logic may be reversed ><. So
     ///                       it wasn't reversed, I did add a DT/DST for each
     ///                       clock anyway.
+    /// 08/08/202 Dan Rhea - Was poking around in here and discovered what 
+    ///                      the DST bug is. I check for DST with a UTC time
+    ///                      so it always claims standard time. I need to
+    ///                      rethink how I check for DST to it applies or 
+    ///                      not to each seperate clock. Noodling this...
+    ///                      Fix was simple, check for DST here (Eastern) as
+    ///                      all the other offsets will work with this.
     /// 
     /// ToDo:
     /// 
@@ -95,7 +102,7 @@ namespace MultiTime
                 DelayTime = WaitInSeconds * 1000;
                 timUpdateUI.Interval = DelayTime;
             }
-            DateTime NowIs = DateTime.UtcNow;
+            DateTime NowIs = DateTime.Now; //DateTime.UtcNow;
             if (NowIs.IsDaylightSavingTime())
             {
                 labMsg.Text = "Daylight time (DST)";
@@ -113,6 +120,7 @@ namespace MultiTime
                 string json = r.ReadToEnd();
                 zones = JsonConvert.DeserializeObject<List<TimeZones>>(json);
             }
+
             // Initialize the color map class/list
             LoadColorMap();
             // Create/draw the UI
@@ -356,6 +364,7 @@ namespace MultiTime
             public float offset;        // Standard time UTC offset 
             public float offsetdst;     // DST time UTC offset
             public string cname;        // Control name suffix ( "lab"+cname, "txt"+cname )
+            public bool isDST = false;  // DST flag
         }
 
         /// <summary>
