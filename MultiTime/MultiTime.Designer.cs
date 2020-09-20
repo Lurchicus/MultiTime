@@ -29,21 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnRun = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
             this.labMsg = new System.Windows.Forms.Label();
             this.timUpdateUI = new System.Windows.Forms.Timer(this.components);
+            this.ottoTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // btnRun
-            // 
-            this.btnRun.Location = new System.Drawing.Point(209, 32);
-            this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(75, 23);
-            this.btnRun.TabIndex = 27;
-            this.btnRun.Text = "Run";
-            this.btnRun.UseVisualStyleBackColor = true;
-            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
             // btnDone
             // 
@@ -68,6 +58,11 @@
             // 
             this.timUpdateUI.Tick += new System.EventHandler(this.timUpdateUI_Tick);
             // 
+            // ottoTimer
+            // 
+            this.ottoTimer.Interval = 1000;
+            this.ottoTimer.Tick += new System.EventHandler(this.ottosTimer);
+            // 
             // MultiTime
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -78,7 +73,6 @@
             this.ClientSize = new System.Drawing.Size(429, 59);
             this.Controls.Add(this.labMsg);
             this.Controls.Add(this.btnDone);
-            this.Controls.Add(this.btnRun);
             this.Name = "MultiTime";
             this.Text = "MultiTime";
             this.Load += new System.EventHandler(this.MultiTime_Load);
@@ -88,10 +82,10 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.Label labMsg;
         private System.Windows.Forms.Timer timUpdateUI;
+        private System.Windows.Forms.Timer ottoTimer;
     }
 }
 

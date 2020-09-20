@@ -9,7 +9,8 @@ namespace MultiTime
 {
     /// <summary>
     /// Dynamicly display multiple DST/ST zone adjusted times where the clock 
-    /// names and UTC offsets are defined in a json file
+    /// names and UTC offsets are defined in a json file we also use a json
+    /// file to determine the color of each "clock"
     /// </summary>
     /// 
     /// Change history:
@@ -44,13 +45,16 @@ namespace MultiTime
     ///                     - Noticed the DST/ST logic may be reversed ><. So
     ///                       it wasn't reversed, I did add a DT/DST for each
     ///                       clock anyway.
-    /// 08/08/202 Dan Rhea - Was poking around in here and discovered what 
-    ///                      the DST bug is. I check for DST with a UTC time
-    ///                      so it always claims standard time. I need to
-    ///                      rethink how I check for DST to it applies or 
-    ///                      not to each seperate clock. Noodling this...
-    ///                      Fix was simple, check for DST here (Eastern) as
-    ///                      all the other offsets will work with this.
+    /// 08/08/2020 Dan Rhea - Was poking around in here and discovered what 
+    ///                       the DST bug is. I check for DST with a UTC time
+    ///                       so it always claims standard time. I need to
+    ///                       rethink how I check for DST to it applies or 
+    ///                       not to each seperate clock. Noodling this...
+    ///                       Fix was simple, check for DST here (Eastern) as
+    ///                       all the other offsets will work with this.
+    /// 09/19/2020 Dan Rhea - Removed the "Run" button and replaced it with a
+    ///                       one second timer since the button was pretty
+    ///                       silly when you think about it.
     /// 
     /// ToDo:
     /// 
@@ -127,8 +131,10 @@ namespace MultiTime
             DrawUI();
             // Update the UI elements
             ShowClocks();
-            btnRun.Focus();
+            btnDone.Focus();
             Running = false;
+            // Start the clock after a short delay
+            ottoTimer.Enabled = true;
             Application.DoEvents();
         }
 
@@ -232,8 +238,8 @@ namespace MultiTime
                 if (Cl >= ColorMap.Count) { Cl = 0; }
             }
             // Adjust the ST/DST label and buttons
-            labMsg.Top = BTop + MarginL + btnRun.Height;
-            btnRun.Top = BTop + MarginT + btnRun.Height;
+            labMsg.Top = BTop + MarginL + btnDone.Height;
+            //btnRun.Top = BTop + MarginT + btnRun.Height;
             btnDone.Top = BTop + MarginT + btnDone.Height;
             // Size the form to the controls
             Height = btnDone.Top + MarginT + btnDone.Height + MarginT;
@@ -242,15 +248,14 @@ namespace MultiTime
         }
 
         /// <summary>
-        /// Run button click event handler - Start updating clocks every 1000 ms
+        /// Run timer event handler - Start the clock
         /// </summary>
-        /// <param name="sender">Run button</param>
-        /// <param name="e">Click event arguments</param>
-        private void btnRun_Click(object sender, EventArgs e)
+        /// <param name="sender">Timer event</param>
+        /// <param name="e">Timer event arguments</param>
+        private void ottosTimer(object sender, EventArgs e)
         {
-            if (Running) { return; }
+            ottoTimer.Enabled = false;
 
-            btnRun.Enabled = false;
             HellFrozeOver = false;
             timUpdateUI.Start();
             Running = true;
@@ -305,7 +310,7 @@ namespace MultiTime
         public void ShowClocks()
         {
             DateTime NowIs = DateTime.UtcNow;
-            float Offset = 0;
+            float Offset;
 
             for (int Clock = 0; Clock < zones.Count; Clock++)
             {
@@ -340,8 +345,8 @@ namespace MultiTime
                         NowIs.AddHours(Offset).ToLongTimeString() + " - " +
                         NowIs.AddHours(Offset).Hour.ToString() + ":" +
                         NowIs.AddHours(Offset).Minute.ToString("D2") + ":" +
-                        NowIs.AddHours(Offset).Second.ToString("D2") + " " +
-                        (NowIs.IsDaylightSavingTime() ? "DST" : "DT");
+                        NowIs.AddHours(Offset).Second.ToString("D2") + " "; //+
+                        //(NowIs.IsDaylightSavingTime() ? "DST" : "DT");
                     // Update the UTC offset (only need to do once)
                     if (!ClockSet)
                     {
