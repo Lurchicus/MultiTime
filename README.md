@@ -10,7 +10,7 @@ The main reason I wrote this was to teach myself several concepts.
 - Learn how to dynamicly generate UI elements using C#
 - Learn how to create an MSIX installer for installing a WinForms application
 
-The install package I created can be installed but it would require installing my self signed certificate
+The install package I created can be installed but it would require installing my public self signed certificate
 to the system you run the program on (along with the associated risks). Better to get the program source
 and make your own install package.
 
