@@ -34,7 +34,7 @@ namespace MultiTime
     ///                       garbage collect every 60 seconds
     ///                     - Pull clock information from the MultiTime.json
     ///                       file
-    /// 12/11/2018 Dan Rhea - Dynamily create a row for each clock definition 
+    /// 12/11/2018 Dan Rhea - Dynamicly create a row for each clock definition 
     ///                       loaded
     ///                     - Moved the colors to a color map class that I
     ///                       can cycle through when creating UI elements
@@ -55,6 +55,10 @@ namespace MultiTime
     /// 09/19/2020 Dan Rhea - Removed the "Run" button and replaced it with a
     ///                       one second timer since the button was pretty
     ///                       silly when you think about it.
+    ///                     - Removed the DT/DST display per clock since the
+    ///                       ".IsDaylightSavingTime()" datetime method only 
+    ///                       works for the current time where the program
+    ///                       is running (probably a better way to do this)
     /// 
     /// ToDo:
     /// 
