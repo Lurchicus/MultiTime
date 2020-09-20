@@ -59,8 +59,13 @@ namespace MultiTime
     ///                       ".IsDaylightSavingTime()" datetime method only 
     ///                       works for the current time where the program
     ///                       is running (probably a better way to do this)
+    /// 09/20/2020 Dan Rhea - Added an MSIX package project to the solution
+    ///                       so that the program can be installed (if my
+    ///                       self made developer certificate is installed)
+    ///                     - Added AppPath to hold the exe path so we will 
+    ///                       be able to locate our included .json files.
     /// 
-    /// ToDo:
+    /// ToDo: Add the GNU 3 license along with an icon to a seperate reader form and splash screen.
     /// 
     public partial class MultiTime : Form
     {
@@ -71,6 +76,8 @@ namespace MultiTime
         public int DelayTime { get; set; } = WaitInSeconds * 1000;  // Milliseconds to wait between clock updates
         public static int WaitInSeconds { get; set; } = 1;          // Seconds to wait between clock updates
         public static bool ClockSet { get; set; } = false;          // Has clock been set the first time or not?
+        public static string AppPath { get; set; } = ".\\";         // Our exe location so we know where to look for our json files
+        // comodo
 
         public List<TimeZones> zones;                       // List of clock info, and UTC offsets
         public List<Label> Lab = new List<Label>();         // List of clock row labels
@@ -122,8 +129,11 @@ namespace MultiTime
                 IsDST = false;
             }
 
+            // Get the application path so we can find our .jason files
+            AppPath = Application.StartupPath;
+
             // Load zone information into zones from json file
-            using (StreamReader r = new StreamReader("MultiTime.json"))
+            using (StreamReader r = new StreamReader(AppPath + "\\MultiTime.json"))
             {
                 string json = r.ReadToEnd();
                 zones = JsonConvert.DeserializeObject<List<TimeZones>>(json);
@@ -149,7 +159,7 @@ namespace MultiTime
         void LoadColorMap()
         {
             // Load Color information into ColorMap from json file
-            using (StreamReader r = new StreamReader("MultiColor.json"))
+            using (StreamReader r = new StreamReader(AppPath + "\\MultiColor.json"))
             {
                 string json = r.ReadToEnd();
                 ColorMap = JsonConvert.DeserializeObject<List<RGB>>(json);
